@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "idiom" : "mac",
+      "filename" : "temp-icon.pdf"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
