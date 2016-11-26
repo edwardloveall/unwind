@@ -1,25 +1,36 @@
 import Cocoa
 
-class MenuController {
+class MenuController: NSObject {
   let statusItem: NSStatusItem
-  let popOver = NSPopover()
+  let popover = NSPopover()
 
-  init() {
+  override init() {
     statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     statusItem.image = NSImage(named: "temp-icon")
+    popover.contentViewController = PopoverViewController()
+
+    super.init()
+
     if let button = statusItem.button {
-      button.action = #selector(MenuController.togglePopover)
+      button.target = self
+      button.action = #selector(togglePopover(_:))
     }
-    popOver.contentViewController = PopoverViewController()
   }
 
-  @objc func togglePopover(_ sender: Any?) {
-    guard let button = statusItem.button else { return }
-
-    if popOver.isShown {
-      popOver.performClose(sender)
+  func togglePopover(_ sender: Any?) {
+    if popover.isShown {
+      closePopover(sender)
     } else {
-      popOver.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+      showPopover(sender)
     }
+  }
+
+  func closePopover(_ sender: Any?) {
+    popover.performClose(sender)
+  }
+
+  func showPopover(_ sender: Any?) {
+    guard let button = statusItem.button else { return }
+    popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
   }
 }
