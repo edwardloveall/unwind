@@ -297,6 +297,7 @@
 				39B55CA41DE7DAE800900904 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

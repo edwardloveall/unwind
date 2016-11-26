@@ -3,6 +3,7 @@ import Cocoa
 class MenuController: NSObject {
   let statusItem: NSStatusItem
   let popover = NSPopover()
+  var timer = Timer()
 
   override init() {
     statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
@@ -15,21 +16,38 @@ class MenuController: NSObject {
       button.target = self
       button.action = #selector(togglePopover(_:))
     }
+
+    setupTimer()
+  }
+
+  func setupTimer() {
+    let tenMinutes = TimeInterval(10 * 60)
+    let runLoop = RunLoop.current
+
+    timer.invalidate()
+    timer = Timer(timeInterval: tenMinutes,
+                  target: self,
+                  selector: #selector(showPopover),
+                  userInfo: nil,
+                  repeats: false)
+    runLoop.add(timer, forMode: .commonModes)
+    runLoop.add(timer, forMode: .eventTrackingRunLoopMode)
   }
 
   func togglePopover(_ sender: Any?) {
     if popover.isShown {
       closePopover(sender)
     } else {
-      showPopover(sender)
+      showPopover()
     }
   }
 
-  func closePopover(_ sender: Any?) {
+  @IBAction func closePopover(_ sender: Any?) {
     popover.performClose(sender)
+    setupTimer()
   }
 
-  func showPopover(_ sender: Any?) {
+  func showPopover() {
     guard let button = statusItem.button else { return }
     popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
   }
