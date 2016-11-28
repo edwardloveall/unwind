@@ -31,3 +31,6 @@ Carthage
 # AppCode specific files
 .idea/
 *.iml
+
+# Assets
+*.sketch
