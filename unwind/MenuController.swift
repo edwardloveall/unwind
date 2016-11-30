@@ -44,11 +44,19 @@ class MenuController: NSObject {
 
   @IBAction func closePopover(_ sender: Any?) {
     popover.performClose(sender)
+    activatePreviousApp()
     setupTimer()
   }
 
   func showPopover() {
     guard let button = statusItem.button else { return }
     popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+  }
+
+  func activatePreviousApp() {
+    let workspace = NSWorkspace.shared()
+    if let app = workspace.menuBarOwningApplication {
+      app.activate(options: [])
+    }
   }
 }
