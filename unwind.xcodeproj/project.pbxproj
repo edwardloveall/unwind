@@ -13,6 +13,9 @@
 		39B55CA61DE7DEE600900904 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B55CA51DE7DEE600900904 /* MenuController.swift */; };
 		39B55CA91DE7E25500900904 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B55CA71DE7E25500900904 /* PopoverViewController.swift */; };
 		39B55CAA1DE7E25500900904 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39B55CA81DE7E25500900904 /* PopoverViewController.xib */; };
+		39DA03EA1DEFAB0900282550 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA03E81DEFAB0900282550 /* PreferencesViewController.swift */; };
+		39DA03EB1DEFAB0900282550 /* PreferencesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39DA03E91DEFAB0900282550 /* PreferencesViewController.xib */; };
+		39DA03ED1DEFAE7000282550 /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA03EC1DEFAE7000282550 /* PreferencesWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		39B55CA51DE7DEE600900904 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		39B55CA71DE7E25500900904 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		39B55CA81DE7E25500900904 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
+		39DA03E81DEFAB0900282550 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		39DA03E91DEFAB0900282550 /* PreferencesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesViewController.xib; sourceTree = "<group>"; };
+		39DA03EC1DEFAE7000282550 /* PreferencesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				39B55CA51DE7DEE600900904 /* MenuController.swift */,
 				39B55CA71DE7E25500900904 /* PopoverViewController.swift */,
 				39B55CA81DE7E25500900904 /* PopoverViewController.xib */,
+				39DA03EC1DEFAE7000282550 /* PreferencesWindow.swift */,
+				39DA03E81DEFAB0900282550 /* PreferencesViewController.swift */,
+				39DA03E91DEFAB0900282550 /* PreferencesViewController.xib */,
 				39B55C9A1DE7DAE800900904 /* Assets.xcassets */,
 				39B55C9C1DE7DAE800900904 /* MainMenu.xib */,
 				39B55C9F1DE7DAE800900904 /* Info.plist */,
@@ -130,6 +139,7 @@
 				39B55C9B1DE7DAE800900904 /* Assets.xcassets in Resources */,
 				39B55C9E1DE7DAE800900904 /* MainMenu.xib in Resources */,
 				39B55CAA1DE7E25500900904 /* PopoverViewController.xib in Resources */,
+				39DA03EB1DEFAB0900282550 /* PreferencesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,8 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				39B55CA61DE7DEE600900904 /* MenuController.swift in Sources */,
+				39DA03ED1DEFAE7000282550 /* PreferencesWindow.swift in Sources */,
 				39B55CA91DE7E25500900904 /* PopoverViewController.swift in Sources */,
 				39B55C991DE7DAE800900904 /* AppDelegate.swift in Sources */,
+				39DA03EA1DEFAB0900282550 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

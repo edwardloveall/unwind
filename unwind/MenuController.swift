@@ -2,19 +2,20 @@ import Cocoa
 
 class MenuController: NSObject {
   let statusItem: NSStatusItem
-  let popover = NSPopover()
+  let interrupter = NSPopover()
+  let preferences = NSWindow()
   var timer = Timer()
 
   override init() {
     statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     statusItem.image = NSImage(named: "temp-icon")
-    popover.contentViewController = PopoverViewController()
+    interrupter.contentViewController = PopoverViewController()
 
     super.init()
 
     if let button = statusItem.button {
       button.target = self
-      button.action = #selector(togglePopover(_:))
+      button.action = #selector(togglePreferences(_:))
     }
 
     setupTimer()
@@ -34,8 +35,21 @@ class MenuController: NSObject {
     runLoop.add(timer, forMode: .eventTrackingRunLoopMode)
   }
 
+  func togglePreferences(_ sender: Any?) {
+    guard
+      let button = statusItem.button,
+      let window = button.window
+    else { return }
+    preferences.contentViewController = PreferencesViewController()
+    let buttonFrame = window.frame
+    let origin = NSPoint(x: buttonFrame.minX,
+                         y: buttonFrame.maxY)
+    preferences.setFrameOrigin(origin)
+    preferences.makeKeyAndOrderFront(sender)
+  }
+
   func togglePopover(_ sender: Any?) {
-    if popover.isShown {
+    if interrupter.isShown {
       closePopover(sender)
     } else {
       showPopover()
@@ -43,14 +57,14 @@ class MenuController: NSObject {
   }
 
   @IBAction func closePopover(_ sender: Any?) {
-    popover.performClose(sender)
+    interrupter.performClose(sender)
     activatePreviousApp()
     setupTimer()
   }
 
   func showPopover() {
     guard let button = statusItem.button else { return }
-    popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+    interrupter.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
   }
 
   func activatePreviousApp() {
