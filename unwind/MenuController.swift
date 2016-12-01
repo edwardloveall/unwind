@@ -3,7 +3,7 @@ import Cocoa
 class MenuController: NSObject {
   let statusItem: NSStatusItem
   let interrupter = NSPopover()
-  let preferences = NSWindow()
+  let preferences = PreferencesViewController()
   var timer = Timer()
 
   override init() {
@@ -13,12 +13,25 @@ class MenuController: NSObject {
 
     super.init()
 
-    if let button = statusItem.button {
-      button.target = self
-      button.action = #selector(togglePreferences(_:))
-    }
-
+    setupPreferencesMenu()
     setupTimer()
+  }
+
+  func setupPreferencesMenu() {
+    let menu = NSMenu()
+    let prefs = NSMenuItem()
+    prefs.view = preferences.view
+
+    let separator = NSMenuItem.separator()
+    let quit = NSMenuItem(title: "Quit Unwind",
+                          action: #selector(terminate(_:)),
+                          keyEquivalent: "q")
+
+    menu.addItem(prefs)
+    menu.addItem(separator)
+    menu.addItem(quit)
+
+    statusItem.menu = menu
   }
 
   func setupTimer() {
@@ -33,19 +46,6 @@ class MenuController: NSObject {
                   repeats: false)
     runLoop.add(timer, forMode: .commonModes)
     runLoop.add(timer, forMode: .eventTrackingRunLoopMode)
-  }
-
-  func togglePreferences(_ sender: Any?) {
-    guard
-      let button = statusItem.button,
-      let window = button.window
-    else { return }
-    preferences.contentViewController = PreferencesViewController()
-    let buttonFrame = window.frame
-    let origin = NSPoint(x: buttonFrame.minX,
-                         y: buttonFrame.maxY)
-    preferences.setFrameOrigin(origin)
-    preferences.makeKeyAndOrderFront(sender)
   }
 
   func togglePopover(_ sender: Any?) {
@@ -72,5 +72,9 @@ class MenuController: NSObject {
     if let app = workspace.menuBarOwningApplication {
       app.activate(options: [])
     }
+  }
+
+  func terminate(_ sender: Any?) {
+    NSApplication.shared().terminate(self)
   }
 }
