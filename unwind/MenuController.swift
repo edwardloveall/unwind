@@ -5,16 +5,19 @@ class MenuController: NSObject {
   let interrupter = NSPopover()
   let preferences = PreferencesViewController()
   var timer = Timer()
+  var frequency: Int
 
   override init() {
     statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     statusItem.image = NSImage(named: "temp-icon")
     interrupter.contentViewController = PopoverViewController()
+    frequency = 10
 
     super.init()
 
     setupPreferencesMenu()
     setupTimer()
+    preferences.menuController = self
   }
 
   func setupPreferencesMenu() {
@@ -22,20 +25,13 @@ class MenuController: NSObject {
     let prefs = NSMenuItem()
     prefs.view = preferences.view
 
-    let separator = NSMenuItem.separator()
-    let quit = NSMenuItem(title: "Quit Unwind",
-                          action: #selector(terminate(_:)),
-                          keyEquivalent: "q")
-
     menu.addItem(prefs)
-    menu.addItem(separator)
-    menu.addItem(quit)
 
     statusItem.menu = menu
   }
 
   func setupTimer() {
-    let tenMinutes = TimeInterval(10 * 60)
+    let tenMinutes = TimeInterval(frequency * 60)
     let runLoop = RunLoop.current
 
     timer.invalidate()
@@ -74,7 +70,7 @@ class MenuController: NSObject {
     }
   }
 
-  func terminate(_ sender: Any?) {
-    NSApplication.shared().terminate(self)
+  func setFrequency(frequency: Int) {
+    self.frequency = frequency
   }
 }
