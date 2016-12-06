@@ -3,53 +3,42 @@ import Cocoa
 class MenuController: NSObject {
   let statusItem: NSStatusItem
   let interrupter = NSPopover()
-  let preferences = PreferencesViewController()
   var timer = Timer()
-  var frequency: Int
 
   override init() {
     statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
     statusItem.image = NSImage(named: "temp-icon")
     interrupter.contentViewController = PopoverViewController()
-    frequency = 10
 
     super.init()
 
-    setupPreferencesMenu()
+    setupMenu()
     setupTimer()
-    preferences.menuController = self
   }
 
-  func setupPreferencesMenu() {
+  func setupMenu() {
     let menu = NSMenu()
-    let prefs = NSMenuItem()
-    prefs.view = preferences.view
-
+    let prefs = NSMenuItem(title: "Preferences...",
+                           action: #selector(AppDelegate.openPreferences(_:)),
+                           keyEquivalent: ",")
     menu.addItem(prefs)
 
     statusItem.menu = menu
   }
 
   func setupTimer() {
-    let tenMinutes = TimeInterval(frequency * 60)
+    let frequency = DataStore.frequency
+    let interval = TimeInterval(frequency * 60)
     let runLoop = RunLoop.current
 
     timer.invalidate()
-    timer = Timer(timeInterval: tenMinutes,
+    timer = Timer(timeInterval: interval,
                   target: self,
                   selector: #selector(showPopover),
                   userInfo: nil,
                   repeats: false)
     runLoop.add(timer, forMode: .commonModes)
     runLoop.add(timer, forMode: .eventTrackingRunLoopMode)
-  }
-
-  func togglePopover(_ sender: Any?) {
-    if interrupter.isShown {
-      closePopover(sender)
-    } else {
-      showPopover()
-    }
   }
 
   @IBAction func closePopover(_ sender: Any?) {
@@ -68,9 +57,5 @@ class MenuController: NSObject {
     if let app = workspace.menuBarOwningApplication {
       app.activate(options: [])
     }
-  }
-
-  func setFrequency(frequency: Int) {
-    self.frequency = frequency
   }
 }
