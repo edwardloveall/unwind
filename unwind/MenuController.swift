@@ -18,10 +18,16 @@ class MenuController: NSObject {
 
   func setupMenu() {
     let menu = NSMenu()
-    let prefs = NSMenuItem(title: "Preferences...",
+    let prefs = NSMenuItem(title: "Preferences",
                            action: #selector(AppDelegate.openPreferences(_:)),
                            keyEquivalent: ",")
+    let separator = NSMenuItem.separator()
+    let quit = NSMenuItem(title: "Quit",
+                          action: #selector(AppDelegate.closeApplication(_:)),
+                          keyEquivalent: "q")
     menu.addItem(prefs)
+    menu.addItem(separator)
+    menu.addItem(quit)
 
     statusItem.menu = menu
   }

@@ -15,8 +15,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_ aNotification: Notification) {}
 
-  @IBAction func openPreferences(_ sender: NSMenuItem) {
+  func openPreferences(_ sender: NSMenuItem) {
     let window = preferencesWindowController?.window
     preferencesWindowController?.showWindow(window)
+  }
+
+  func closeApplication(_ sender: NSMenuItem) {
+    let app = NSApplication.shared()
+    app.terminate(self)
   }
 }
