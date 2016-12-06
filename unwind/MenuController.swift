@@ -7,7 +7,7 @@ class MenuController: NSObject {
 
   override init() {
     statusItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
-    statusItem.image = NSImage(named: "temp-icon")
+    statusItem.image = NSImage(named: "menu-icon")
     interrupter.contentViewController = PopoverViewController()
 
     super.init()
