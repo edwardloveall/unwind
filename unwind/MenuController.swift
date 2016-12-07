@@ -22,7 +22,7 @@ class MenuController: NSObject {
                            action: #selector(AppDelegate.openPreferences(_:)),
                            keyEquivalent: ",")
     let separator = NSMenuItem.separator()
-    let quit = NSMenuItem(title: "Quit",
+    let quit = NSMenuItem(title: "Quit Unwind",
                           action: #selector(AppDelegate.closeApplication(_:)),
                           keyEquivalent: "q")
     menu.addItem(prefs)
