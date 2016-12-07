@@ -8,6 +8,7 @@ v0.2 - 2016-12-7
 ## Fixes
 
 * Ensure that app preferences will be on top of other windows
+* Menubar icon now works in dark mode
 
 v0.1 - 2016-12-6
 
