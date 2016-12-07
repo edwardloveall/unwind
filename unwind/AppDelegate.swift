@@ -18,6 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func openPreferences(_ sender: NSMenuItem) {
     let window = preferencesWindowController?.window
     preferencesWindowController?.showWindow(window)
+    NSApp.activate(ignoringOtherApps: true)
   }
 
   func closeApplication(_ sender: NSMenuItem) {
