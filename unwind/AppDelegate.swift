@@ -4,6 +4,7 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
   var menuController: MenuController?
   var preferencesWindowController: PreferencesWindowController?
+  let notifier = Notifier()
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     self.menuController = MenuController()
@@ -11,6 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     if DataStore.frequency == 0 {
       DataStore.frequency = 10
     }
+    notifier.setup()
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {}
