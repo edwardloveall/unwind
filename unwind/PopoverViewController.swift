@@ -1,8 +1,14 @@
 import Cocoa
 
 class PopoverViewController: NSViewController {
+  @IBOutlet var dismissButton: NSButton!
+
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+
+  override func viewWillAppear() {
+    dismissButton.title = DataStore.message
   }
 
   @IBAction func doneClicked(_ sender: Any) {

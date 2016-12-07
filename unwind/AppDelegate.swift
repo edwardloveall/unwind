@@ -7,11 +7,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   let notifier = Notifier()
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
-    self.menuController = MenuController()
-    self.preferencesWindowController = PreferencesWindowController()
     if DataStore.frequency == 0 {
       DataStore.frequency = 10
     }
+    self.menuController = MenuController()
+    self.preferencesWindowController = PreferencesWindowController()
     notifier.setup()
   }
 
